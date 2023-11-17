@@ -1,0 +1,6 @@
+.docsWrapper{
+    width: 50%;
+    background: var(--second);
+    min-height: 100vh;
+    padding: 1rem;
+}
