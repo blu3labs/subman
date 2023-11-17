@@ -15,22 +15,15 @@ abstract contract SubVerifier is EIP712 {
 
     mapping(bytes32 => bool) private _canceledSubPayments;
 
-    event SubPaymentCanceled(LibSub.SubPayment subPayment);
-
     constructor(string memory _name, string memory _version) EIP712(_name, _version) {}
-
-    function cancel(LibSub.SubPayment memory _subPayment) external {
-        require(_subPayment.subscriber == msg.sender, "SubVerifier: caller is not the subscriber");
-        require(_subPayment.endTime > block.timestamp, "SubVerifier: subPayment is expired");
-        require(!_canceledSubPayments[_subPayment.hashSubPayment()], "SubVerifier: subPayment is already canceled");
-
-        _canceledSubPayments[_subPayment.hashSubPayment()] = true;
-
-        emit SubPaymentCanceled(_subPayment);
-    }
 
     function isCanceled(LibSub.SubPayment memory _subPayment) public view returns (bool) {
         return _canceledSubPayments[_subPayment.hashSubPayment()];
+    }
+
+    function _cancelSubPayment(LibSub.SubPayment memory _subPayment) internal {
+        require(!_canceledSubPayments[_subPayment.hashSubPayment()], "SubVerifier: subPayment is already canceled");
+        _canceledSubPayments[_subPayment.hashSubPayment()] = true;
     }
 
     function verify(LibSub.SubPayment memory _subPayment, bytes memory _signature) internal view {

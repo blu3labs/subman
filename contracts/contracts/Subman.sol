@@ -15,9 +15,14 @@ contract SubMan is SubVerifier, ReentrancyGuard {
 
     mapping(uint256 => LibSub.SubPlan) private _subPlans;
     mapping(address => uint256[]) private _subPlansByOwner;
-    mapping(address => EnumerableSet.UintSet) private _subedPlans; //add getters
+    mapping(address => EnumerableSet.UintSet) private _subedPlans;
+    mapping(address => mapping(uint256 => uint256)) private _userSubDeadline;
 
+    event SubPaymentCanceled(LibSub.SubPayment subPayment);
+    event SubPaymentProcessed(LibSub.SubPayment subPayment, uint256 newDeadline);
+    event SubPlanActivated(uint256 subPlanId, LibSub.SubPlan subPlan);
     event SubPlanCreated(uint256 subPlanId, LibSub.SubPlan subPlan);
+    event SubPlanDeactivated(uint256 subPlanId, LibSub.SubPlan subPlan);
 
     constructor(string memory _name, string memory _version) SubVerifier(_name, _version) {}
 
@@ -27,6 +32,44 @@ contract SubMan is SubVerifier, ReentrancyGuard {
 
     function getSubPlansByOwner(address _owner) public view returns (uint256[] memory) {
         return _subPlansByOwner[_owner];
+    }
+
+    function getSubedPlans(address _subscriber) public view returns (uint256[] memory) {
+        return _subedPlans[_subscriber].values();
+    }
+
+    function getUserSubDeadline(address _subscriber, uint256 _subPlanId) public view returns (uint256) {
+        return _userSubDeadline[_subscriber][_subPlanId];
+    }
+
+    function getActiveSubPlans(address _subscriber) public view returns (uint256[] memory) {
+        uint256[] memory subedPlans = getSubedPlans(_subscriber);
+        uint256[] memory activeSubPlans = new uint256[](subedPlans.length);
+        uint256 _activeSubPlansCount = 0;
+        for (uint256 i = 0; i < subedPlans.length; i++) {
+            uint256 _subPlanId = subedPlans[i];
+            if (_userSubDeadline[_subscriber][_subPlanId] >= block.timestamp) {
+                activeSubPlans[_activeSubPlansCount] = _subPlanId;
+                _activeSubPlansCount++;
+            }
+        }
+        uint256[] memory _activeSubscriptions = new uint256[](_activeSubPlansCount);
+        for (uint256 i = 0; i < _activeSubPlansCount; i++) {
+            _activeSubscriptions[i] = activeSubPlans[i];
+        }
+        return _activeSubscriptions;
+    }
+
+    function getActiveSubscriptions(address _subscriber) public view returns (LibSub.Subscription[] memory) {
+        uint256[] memory _activeSubPlans = getActiveSubPlans(_subscriber);
+        LibSub.Subscription[] memory _activeSubscriptions = new LibSub.Subscription[](_activeSubPlans.length);
+        for (uint256 i = 0; i < _activeSubPlans.length; i++) {
+            _activeSubscriptions[i] = LibSub.Subscription({
+                subPlan: _subPlans[_activeSubPlans[i]],
+                deadline: _userSubDeadline[_subscriber][_activeSubPlans[i]]
+            });
+        }
+        return _activeSubscriptions;
     }
 
     function createSubPlan(
@@ -65,6 +108,28 @@ contract SubMan is SubVerifier, ReentrancyGuard {
         emit SubPlanCreated(subPlanCount, _subPlans[subPlanCount]);
     }
 
+    function activateSubPlan(uint256 _subPlanId) external nonReentrant {
+        LibSub.SubPlan storage _subPlan = _subPlans[_subPlanId];
+        require(_subPlan.owner == msg.sender, "SubMan: caller is not the owner");
+        require(!_subPlan.active, "SubMan: subPlan is already active");
+        require(_subPlan.deadline >= block.timestamp, "SubMan: subPlan is expired");
+        
+        _subPlan.active = true;
+
+        emit SubPlanActivated(_subPlanId, _subPlan);
+    }
+
+    function deactivateSubPlan(uint256 _subPlanId) external nonReentrant {
+        LibSub.SubPlan storage _subPlan = _subPlans[_subPlanId];
+        require(_subPlan.owner == msg.sender, "SubMan: caller is not the owner");
+        require(_subPlan.active, "SubMan: subPlan is not active");
+        require(_subPlan.deadline >= block.timestamp, "SubMan: subPlan is expired");
+
+        _subPlan.active = false;
+
+        emit SubPlanDeactivated(_subPlanId, _subPlan);
+    }
+
     function processPayment(
         LibSub.SubPayment memory _subPayment,
         bytes memory _signature
@@ -72,9 +137,25 @@ contract SubMan is SubVerifier, ReentrancyGuard {
         verify(_subPayment, _signature);
         require(_subPayment.startTime > block.timestamp, "SubMan: startTime must be greater than current time");
         LibSub.SubPlan memory _subPlan = _subPlans[_subPayment.subPlanId];
+        uint256 newDeadline = block.timestamp + _subPlan.duration;
         require(_subPlan.active, "SubMan: subPlan is not active");
-        require(_subPlan.deadline >= block.timestamp + _subPlan.duration, "SubMan: subPlan is expired");
+        require(_subPlan.deadline >= newDeadline, "SubMan: subPlan is expired");
+        require(_subPayment.endTime >= newDeadline, "SubMan: signature is expired");
         require(_subPlan.price == _subPayment.price, "SubMan: subPlan price changed");
-        require(_subPayment.endTime >= block.timestamp + _subPlan.duration, "SubMan: signature is expired");
+        require(_userSubDeadline[_subPayment.subscriber][_subPayment.subPlanId] < block.timestamp, "SubMan: user already subscribed");
+
+        _subedPlans[_subPayment.subscriber].add(_subPayment.subPlanId);
+        _userSubDeadline[_subPayment.subscriber][_subPayment.subPlanId] = newDeadline;
+
+        emit SubPaymentProcessed(_subPayment, newDeadline);
+    }
+
+    function cancel(LibSub.SubPayment memory _subPayment) external {
+        require(_subPayment.subscriber == msg.sender, "SubMan: caller is not the subscriber");
+        require(_subPayment.endTime > block.timestamp, "SubMan: subPayment is expired");
+        
+        _cancelSubPayment(_subPayment);
+        
+        emit SubPaymentCanceled(_subPayment);
     }
 }

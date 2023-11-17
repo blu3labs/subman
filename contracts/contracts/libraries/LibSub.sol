@@ -28,6 +28,11 @@ library LibSub {
         uint256 price;
     }
 
+    struct Subscription {
+        SubPlan subPlan;
+        uint256 deadline;
+    }
+
     function hashSubPayment(SubPayment memory _subPayment) internal pure returns (bytes32) {
         return keccak256(abi.encode(
             SUB_PAYMENT_TYPEHASH,
