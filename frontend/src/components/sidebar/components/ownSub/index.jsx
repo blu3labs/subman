@@ -34,16 +34,21 @@ function OwnSub({ item }) {
               150 Person has subscribed to your subscription
             </Typography>
 
+
+
+        <div className="subUpdatePriceWrapper">
+
             <Input
               label="Update Price"
               placeholder="Ex. 0.1"
               type="number"
               suffix="USDT"
-            />
-            <Button colorStyle="blueSecondary">Update Price</Button>
+              />
+            <Button colorStyle="blueSecondary">Update</Button>
+              </div>
 
             <div className="subButtons">
-              <Button colorStyle="blueSecondary">Activate</Button>
+              <Button colorStyle="blueSecondary" disabled>Activate</Button>
               <Button colorStyle="redSecondary">Deactivate</Button>
             </div>
           </Card>
