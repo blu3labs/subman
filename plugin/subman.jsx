@@ -14,7 +14,7 @@ const Subman = ({
 
   showPrice = showPrice ?? false;
 
-  let buttonDisabled = true;
+  let buttonDisabled = false;
 
   let userIsSubscribed = false;
 
