@@ -13,7 +13,7 @@ func Start() {
 	handler := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},
 		AllowedMethods: []string{"GET", "PUT", "POST", "PATCH"},
-		AllowedHeaders: []string{"a_custom_header", "content_type"},
+		AllowedHeaders: []string{"a_custom_header", "Content-Type"},
 	}).Handler(r)
 	log.Fatal(http.ListenAndServe(":10246", handler))
 }
