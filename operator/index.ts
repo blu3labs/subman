@@ -3,6 +3,9 @@ import { Contract, Wallet, getDefaultProvider } from "ethers";
 import axios from "axios";
 import { ConvertToSubscription, ConvertToTxArgs, Subscription } from "./converter/converter";
 import { GetSubManAddress, GetRPC, GetSubManABI } from "./subman/subman";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const API_URL = process.env.API_URL || "";
 
@@ -11,12 +14,12 @@ async function getExecuteableSubscriptions() {
     const response = await axios.get(`${API_URL}/executeables`);
     let subs: Subscription[] = [];
     if (response.status !== 200) {
-      console.error("Error getting requests", response.status);
+      console.error("Error getting requests1", response.status);
       return subs;
     }
     if (response.data) {
       if (!Array.isArray(response.data)) {
-        console.error("Error getting requests", response.data);
+        console.error("Error getting requests2", response.data);
         return subs;
       }
       for (const sub of response.data) {
@@ -25,7 +28,7 @@ async function getExecuteableSubscriptions() {
     }
     return subs;
   } catch (error) {
-    console.error("Error getting requests", error);
+    console.error("Error getting requests3", error);
     return [];
   }
 }
@@ -38,18 +41,18 @@ async function main() {
   while (true) {
     const before = Date.now();
     const subs = await getExecuteableSubscriptions();
-    console.log(`Found ${subs.length} subscriptions to execute`);
+    console.log("subs", subs);
     if (subs.length > 0) {
       for (const sub of subs) {
         const address = GetSubManAddress(sub.ChainID);
         const abi = GetSubManABI();
         const providerUrl = GetRPC(sub.ChainID);
         const provider = getDefaultProvider(providerUrl);
-        const walletClient = new Wallet(pvKey, provider);
-        const ctr = new Contract(address, abi, wallet);
+        const walletClient = wallet.connect(provider);
+        const ctr = new Contract(address, abi, walletClient);
         try {
           const args = ConvertToTxArgs(sub);
-          const tx = await ctr.executeSubscription(args.subPayment, args.signature, walletAddress);
+          const tx = await ctr.processPayment(args.subPayment, args.signature, walletAddress);
           await tx.wait();
           console.log("tx success", tx.hash);
         } catch (error) {

@@ -18,34 +18,31 @@ abstract contract SubVerifier is EIP712 {
     constructor(string memory _name, string memory _version) EIP712(_name, _version) {}
 
     function isCanceled(LibSub.SubPayment memory _subPayment) public view returns (bool) {
-        return _canceledSubPayments[_subPayment.hashSubPayment()];
+        return _canceledSubPayments[_subPayment.hash()];
     }
 
     function _cancelSubPayment(LibSub.SubPayment memory _subPayment) internal {
-        require(!_canceledSubPayments[_subPayment.hashSubPayment()], "SubVerifier: subPayment is already canceled");
-        _canceledSubPayments[_subPayment.hashSubPayment()] = true;
+        require(!_canceledSubPayments[_subPayment.hash()], "SubVerifier: subPayment is already canceled");
+        _canceledSubPayments[_subPayment.hash()] = true;
     }
 
     function verify(LibSub.SubPayment memory _subPayment, bytes memory _signature) internal view {
         require(!isCanceled(_subPayment), "SubVerifier: subPayment is canceled");
-        bytes32 _hash = _hashTypedDataV4(_subPayment.hashSubPayment());
-        _isValidSigner(_subPayment.subscriber, _hash, _signature);
-    }
-
-    function _isValidSigner(address _signer, bytes32 _hash, bytes memory _signature) internal view {
-        if (_isContract(_signer)) {
+        bytes32 hash = _subPayment.hash();
+        address signer = _subPayment.subscriber;
+        if (_isContract(signer)) {
             require(
-                IERC1271(_signer).isValidSignature(
-                    _hashTypedDataV4(_hash),
+                IERC1271(signer).isValidSignature(
+                    _hashTypedDataV4(hash),
                     _signature
                 ) == MAGICVALUE,
                 "SubVerifier: ERC1271 ticket signature verification error"
             );
         } else {
-            if (_hashTypedDataV4(_hash).recover(_signature) != _signer) {
+            if (_hashTypedDataV4(hash).recover(_signature) != signer) {
                 revert("SubVerifier: ECDSA ticket signature verification error");
             } else {
-                require(_signer != address(0), "SubVerifier: Invalid owner");
+                require(signer != address(0), "SubVerifier: Invalid owner");
             }
         }
     }

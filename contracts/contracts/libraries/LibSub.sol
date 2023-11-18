@@ -3,9 +3,7 @@
 pragma solidity 0.8.23;
 
 library LibSub {
-    bytes32 constant SUB_PAYMENT_TYPEHASH = keccak256(
-        "SubPayment(uint256 subPlanId,address subscriber,uint256 startTime,uint256 endTime,uint256 duration,address paymentToken,uint256 price)"
-    );
+    bytes32 constant SUB_PAYMENT_TYPEHASH = keccak256("SubPayment(uint256 subPlanId,address subscriber,uint256 startTime,uint256 endTime,uint256 duration,address paymentToken,uint256 price)");
 
     struct SubPlan {
         string  title;
@@ -36,7 +34,7 @@ library LibSub {
         uint256 deadline;
     }
 
-    function hashSubPayment(SubPayment memory _subPayment) internal pure returns (bytes32) {
+    function hash(SubPayment memory _subPayment) internal pure returns (bytes32) {
         return keccak256(abi.encode(
             SUB_PAYMENT_TYPEHASH,
             _subPayment.subPlanId,

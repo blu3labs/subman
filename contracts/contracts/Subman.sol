@@ -11,7 +11,6 @@ import {SubVerifier} from "./SubVerifier.sol";
 
 contract SubMan is SubVerifier, ReentrancyGuard {
     using EnumerableSet for EnumerableSet.UintSet;
-    using LibSub for LibSub.SubPayment;
     using SafeERC20 for IERC20;
 
     uint256 public subPlanCount;
