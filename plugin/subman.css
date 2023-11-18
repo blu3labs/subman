@@ -18,11 +18,11 @@
 }
 
 .subman-button:disabled{
-    cursor: not-allowed;
-    background: rgb(232, 232, 232);
-    transform: none;
-    color: rgb(155, 155, 166);
-    border-color: transparent;
+    cursor: not-allowed !important;
+    background: rgb(232, 232, 232) !important;
+    transform: none !important;
+    color: rgb(155, 155, 166) !important;
+    border-color: transparent !important;
 }
 
 .subman-modal {

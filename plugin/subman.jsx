@@ -14,7 +14,7 @@ const Subman = ({
 
   showPrice = showPrice ?? false;
 
-  let buttonDisabled = false;
+  let buttonDisabled = true;
 
   let userIsSubscribed = false;
 
@@ -25,7 +25,7 @@ const Subman = ({
 
   backgroundColor = backgroundColor ?? "#00a9ff";
   textColor = textColor ?? "#fff";
-  
+
   useEffect(() => {
     document.documentElement.style.setProperty(
       "--subman-button-bg",
