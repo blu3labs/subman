@@ -1,5 +1,6 @@
 .sidebarWrapper {
-  width: 40%;
+  width: 50%;
+  min-width: 380px;
   height: 100vh;
   display: flex;
   align-items: flex-start;
@@ -10,7 +11,7 @@
 }
 
 .sidebar {
-  width: 50%;
+  width: 380px;
   height: 100%;
   display: flex;
   flex-direction: column;

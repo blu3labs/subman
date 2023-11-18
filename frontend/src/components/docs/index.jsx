@@ -3,6 +3,7 @@ import { Banner } from "@ensdomains/thorin";
 import "./index.css";
 import { Subman } from "subman-plugin";
 
+
 function Docs() {
   return (
     <Banner alert="info" title="Docs">
@@ -21,7 +22,13 @@ function Docs() {
       <br />
       <br />
       <br />
-      <Subman />
+      <Subman
+        subscriptionId="hasgdjhdas"
+        chainId="97"
+        showPrice
+        backgroundColor="#ffff80"
+        textColor="blue"
+      />
       <br />
       <br />
       <br />

@@ -4857,10 +4857,10 @@ stylis@^4.3.0:
   resolved "https://registry.npmjs.org/stylis/-/stylis-4.3.0.tgz"
   integrity sha512-E87pIogpwUsUwXw7dNyU4QDjdgVMy52m+XEOPEKUn161cCzWjjhPSQhByfd1CcNvrOLnXQ6OnnZDwnJrz/Z4YQ==
 
-subman-plugin@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/subman-plugin/-/subman-plugin-1.0.4.tgz#1121a92e3e3d2696610d0cf933c50b70f3504dc0"
-  integrity sha512-qmDA1vcdV7JbFnbPG998RlSF61v/nsJ/QiXF/Rdaid7rNJvfIR9dd3sMQyQX4Is59UMuMMcsmuTKS1Xn5AHT6Q==
+subman-plugin@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/subman-plugin/-/subman-plugin-1.0.5.tgz#09bc1b44c4b9c640395d84e10b822f22d427ddc3"
+  integrity sha512-OYaBKYR8gfckBD+k/ygFbdw1qdQxYJFqU8gw6PZoGTMeBWfcy9RySqsPgYquIx5R9muUIT+HEK3RGFIQTLg9JA==
   dependencies:
     ethers "5.7"
     react "^18.2.0"

@@ -51,7 +51,7 @@ function Sub({ item }) {
               Extend
             </Button>
             <Button colorStyle="redSecondary" >
-              Cancelled
+              Cancel
             </Button>
           </div>
           </Card>
