@@ -10,7 +10,7 @@ func Router() *mux.Router {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/executeables", controller.GetExecuteableSubscriptions).Methods("GET")
-	router.HandleFunc("/subscription", controller.PutSubscription).Methods("PUT")
+	router.HandleFunc("/subscription", controller.PutSubscription).Methods("POST")
 
 	return router
 }

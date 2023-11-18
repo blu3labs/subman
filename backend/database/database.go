@@ -2,10 +2,12 @@ package database
 
 import (
 	"context"
+	"log"
 	"os"
 	"subman/types"
 	"time"
 
+	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -22,6 +24,10 @@ func init() {
 }
 
 func Connect() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatalf("Error loading .env file: %s", err)
+	}
 	mongoURI, success := os.LookupEnv("MONGO_URI")
 	if !success {
 		panic("MONGO_URI not found")

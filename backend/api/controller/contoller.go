@@ -2,12 +2,14 @@ package controller
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"subman/database"
 	"subman/types"
 )
 
 func PutSubscription(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("PutSubscription")
 	w.Header().Set("Content-Type", "application/json")
 	body := r.Body
 	defer body.Close()
@@ -28,6 +30,7 @@ func PutSubscription(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetExecuteableSubscriptions(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("GetExecuteableSubscriptions")
 	w.Header().Set("Content-Type", "application/json")
 	executeableSubscriptions, err := database.GetExecuteableSubscriptions()
 	if err != nil {
@@ -36,4 +39,5 @@ func GetExecuteableSubscriptions(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	json.NewEncoder(w).Encode(executeableSubscriptions)
+	fmt.Println("GetExecuteableSubscriptions", len(executeableSubscriptions))
 }

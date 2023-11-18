@@ -9,6 +9,7 @@ import (
 	"subman/converter"
 	"subman/database"
 	"subman/types"
+	"time"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
@@ -22,6 +23,14 @@ func Start() {
 	ch := make(chan types.Chain, 1)
 	for _, chain := range chains.Chains {
 		go rabbitHole(chain, ch)
+	}
+	for chain := range ch {
+		go func(chain types.Chain) {
+			fmt.Println("Indexer: ", chain.Name, " is sleeping for ", chain.Interval, " seconds")
+			time.Sleep(time.Duration(chain.Interval) * time.Second)
+			fmt.Println("Indexer: ", chain.Name, " is running")
+			rabbitHole(chain, ch)
+		}(chain)
 	}
 }
 
@@ -93,7 +102,7 @@ func index(chain *types.Chain) ([]mongo.WriteModel, error) {
 		return models, err
 	}
 	models = append(models, planDeactivatedModels...)
-
+	fmt.Println("Indexed", len(models), "events on", chain.Name)
 	return models, nil
 }
 

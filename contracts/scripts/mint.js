@@ -6,13 +6,14 @@ async function main() {
     "function mint(address to, uint256 amount) public returns (bool)",
   ];
 
-  const USDC = await hre.ethers.getContractAt(abi, "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d");
-  const mint1 = await USDC.mint("0x1FAf588150749cAa9E87e1Cd45d29d606c1B8596", parseUnits("1000000", 6));
-  mint1.wait();
-
-  const DAI = await hre.ethers.getContractAt(abi, "0x353bE137dD7cc23396E3D4Ef7BffF930D1E3e2af");
+  // const USDC = await hre.ethers.getContractAt(abi, "0x353bE137dD7cc23396E3D4Ef7BffF930D1E3e2af");
+  // const mint1 = await USDC.mint("0x1FAf588150749cAa9E87e1Cd45d29d606c1B8596", parseUnits("1000000", 6));
+  // mint1.wait();
+  // console.log("minted 1000000 USDC to 0x1FAf588150749cAa9E87e1Cd45d29d606c1B8596");
+  const DAI = await hre.ethers.getContractAt(abi, "0xDa4d5a48efABC18c8584E11D545F80D4f1F4478C");
   const mint2 = await DAI.mint("0x1FAf588150749cAa9E87e1Cd45d29d606c1B8596", parseUnits("1000000", 18));
   mint2.wait();
+  console.log("minted 1000000 DAI to 0x1FAf588150749cAa9E87e1Cd45d29d606c1B8596");
 
 }
 
