@@ -1,6 +1,7 @@
 import React from "react";
 import { Banner } from "@ensdomains/thorin";
 import "./index.css";
+import { Subman } from "subman-plugin";
 
 function Docs() {
   return (
@@ -15,6 +16,13 @@ function Docs() {
       deserunt velit, illum accusantium dolorem, repellat autem. Nemo repellat
       aperiam dolores, consequuntur minima esse aliquam impedit non dignissimos
       reiciendis suscipit iure tempora nisi aliquid dolore,
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <Subman />
+      <br />
       <br />
       <br />
       accusamus rem porro hic quod architecto assumenda illum quas! Unde nemo

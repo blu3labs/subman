@@ -1,0 +1,18 @@
+{
+  "name": "subman-plugin",
+  "version": "1.0.4",
+  "description": "Subman Plugin",
+  "main": "index.jsx",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "subman"
+  ],
+  "author": "blu3",
+  "license": "ISC",
+  "dependencies": {
+    "ethers": "5.7",
+    "react": "^18.2.0"
+  }
+}

@@ -2,9 +2,10 @@ import React from "react";
 import { useAccount, useEnsAvatar, useEnsName, useNetwork } from "wagmi";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { chainLogo } from "@/utils/chainLogo";
-import { Button, LockSVG, Profile } from "@ensdomains/thorin";
+import { Button, LockSVG, Profile, Modal } from "@ensdomains/thorin";
 import blockies from "ethereum-blockies";
 import "./index.css";
+import CreateSub from "../createSub";
 
 function Wallet() {
   let { address, isConnected } = useAccount();
@@ -38,7 +39,7 @@ function Wallet() {
   return (
     <div className="walletWrapper">
       {isConnected && !wrongNetwork && (
-        <Button colorStyle="blueSecondary">Create a Subscription</Button>
+        <CreateSub />
       )}
       {wrongNetwork ? (
         <Button

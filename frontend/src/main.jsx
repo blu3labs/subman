@@ -9,7 +9,7 @@ import { ThorinGlobalStyles, lightTheme } from "@ensdomains/thorin";
 
 import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react";
 import { WagmiConfig } from "wagmi";
-import { arbitrum, mainnet, bsc } from "wagmi/chains";
+import { arbitrum, mainnet, bsc , baseGoerli } from "wagmi/chains";
 
 // 1. Get projectIz
 const projectId = "cfe6a84206725199dbc2e6b7b8ffbccc"; // blu3 - hackathon
@@ -22,7 +22,7 @@ const metadata = {
   icons: ["https://avatars.githubusercontent.com/u/37784886"],
 };
 
-const chains = [mainnet, arbitrum, bsc];
+const chains = [mainnet, arbitrum, bsc, baseGoerli];
 const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata });
 
 // 3. Create modal

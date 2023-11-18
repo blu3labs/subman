@@ -1,7 +1,9 @@
 import React from "react";
-import { Heading } from '@ensdomains/thorin'
+import { Heading } from "@ensdomains/thorin";
 import Wallet from "./components/wallet";
 import "./index.css";
+import Sub from "./components/sub";
+import OwnSub from "./components/ownSub";
 
 function Sidebar() {
   let subs = [
@@ -9,6 +11,8 @@ function Sidebar() {
       title: "Sub asjkdhs asdjkhska askldjhklasd1",
       price: "0.1",
       symbol: "ETH",
+      description: "lorem ajksdhaskl askldjklsad kjlasjdhkldsa",
+      endDate: "12/12/2021",
     },
     {
       title: "Sub 2",
@@ -36,9 +40,7 @@ function Sidebar() {
     <div className="sidebarWrapper">
       <div className="sidebar">
         <div className="sidebarTop">
-          {/* <div className="sidebarHeader">
-            <span>Subman</span>
-          </div> */}
+       
           <Heading>Subman</Heading>
 
           <div className="sidebarBody">
@@ -47,12 +49,7 @@ function Sidebar() {
                 <div className="sidebarSubsTitle">Subscribed</div>
                 <div className="sidebarSubsItems">
                   {subs.map((item, index) => (
-                    <button key={index}>
-                      <span title={item.title}>{item.title}</span>
-                      <span>
-                        {item.price} {item.symbol}
-                      </span>
-                    </button>
+                    <Sub key={index} item={item} />
                   ))}
                 </div>
               </div>
@@ -63,12 +60,8 @@ function Sidebar() {
                 <div className="sidebarSubsTitle">Subscribed You</div>
                 <div className="sidebarSubsItems">
                   {subs.map((item, index) => (
-                    <button key={index}>
-                      <span title={item.title}>{item.title}</span>
-                      <span>
-                        {item.price} {item.symbol}
-                      </span>
-                    </button>
+                    <OwnSub key={index} item={item} />
+               
                   ))}
                 </div>
               </div>
