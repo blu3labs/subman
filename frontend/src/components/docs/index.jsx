@@ -1,20 +1,22 @@
 import React from "react";
+import { Banner } from "@ensdomains/thorin";
 import "./index.css";
 
 function Docs() {
   return (
-    <div className="docsWrapper">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem
-      voluptates eveniet tempora nostrum dicta. Nulla exercitationem neque minus
-      iusto voluptatum minima, nisi quae officia fuga quaerat sed omnis tempore
-      perferendis inventore modi facilis molestiae iste explicabo aliquam,
-      voluptate quasi! Eligendi excepturi voluptatibus soluta, sed nisi dolorum
-      delectus atque iste culpa quasi asperiores? Aliquam, quae maiores saepe
-      nulla numquam deserunt velit, illum accusantium dolorem, repellat autem.
-      Nemo repellat aperiam dolores, consequuntur minima esse aliquam impedit
-      non dignissimos reiciendis suscipit iure tempora nisi aliquid dolore,
-      <br/>
-      <br/>
+    <Banner alert="info" title="Docs">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
+      sit amet consectetur adipisicing elit. Exercitationem voluptates eveniet
+      tempora nostrum dicta. Nulla exercitationem neque minus iusto voluptatum
+      minima, nisi quae officia fuga quaerat sed omnis tempore perferendis
+      inventore modi facilis molestiae iste explicabo aliquam, voluptate quasi!
+      Eligendi excepturi voluptatibus soluta, sed nisi dolorum delectus atque
+      iste culpa quasi asperiores? Aliquam, quae maiores saepe nulla numquam
+      deserunt velit, illum accusantium dolorem, repellat autem. Nemo repellat
+      aperiam dolores, consequuntur minima esse aliquam impedit non dignissimos
+      reiciendis suscipit iure tempora nisi aliquid dolore,
+      <br />
+      <br />
       accusamus rem porro hic quod architecto assumenda illum quas! Unde nemo
       error impedit atque cupiditate repellendus sed! Lorem ipsum dolor sit,
       amet consectetur adipisicing elit. Ducimus id aspernatur ea repudiandae,
@@ -33,8 +35,8 @@ function Docs() {
       assumenda aspernatur animi, nam porro! Mollitia facere fugiat alias,
       repudiandae ex necessitatibus inventore dolorum sunt minus et laboriosam,
       ullam, aspernatur modi vero?
-      <br/>
-      <br/>
+      <br />
+      <br />
       accusamus rem porro hic quod architecto assumenda illum quas! Unde nemo
       error impedit atque cupiditate repellendus sed! Lorem ipsum dolor sit,
       amet consectetur adipisicing elit. Ducimus id aspernatur ea repudiandae,
@@ -53,8 +55,8 @@ function Docs() {
       assumenda aspernatur animi, nam porro! Mollitia facere fugiat alias,
       repudiandae ex necessitatibus inventore dolorum sunt minus et laboriosam,
       ullam, aspernatur modi vero?
-      <br/>
-      <br/>
+      <br />
+      <br />
       accusamus rem porro hic quod architecto assumenda illum quas! Unde nemo
       error impedit atque cupiditate repellendus sed! Lorem ipsum dolor sit,
       amet consectetur adipisicing elit. Ducimus id aspernatur ea repudiandae,
@@ -73,7 +75,7 @@ function Docs() {
       assumenda aspernatur animi, nam porro! Mollitia facere fugiat alias,
       repudiandae ex necessitatibus inventore dolorum sunt minus et laboriosam,
       ullam, aspernatur modi vero?
-    </div>
+    </Banner>
   );
 }
 

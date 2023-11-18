@@ -1,6 +1,7 @@
-.docsWrapper{
-    width: 50%;
-    background: var(--second);
-    min-height: 100vh;
-    padding: 1rem;
+.kbuNwa{
+    width: 50% !important;
+    background: var(--second) !important;
+    min-height: 100vh !important;
+    padding: 1rem !important;
+    border-radius: 0 !important;
 }

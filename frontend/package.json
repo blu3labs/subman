@@ -10,8 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ensdomains/thorin": "^0.6.44",
+    "@web3modal/wagmi": "^3.3.2",
+    "ethereum-blockies": "^0.1.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-transition-state": "^2.1.1",
+    "styled-components": "^6.1.1",
+    "wagmi": "^1.4.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
