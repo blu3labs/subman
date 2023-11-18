@@ -1,6 +1,10 @@
 node_modules
 .env
 
+# Certora Prover
+contracts/node_modules
+contracts/.certora_internal
+
 # Hardhat files
 /cache
 /artifacts
