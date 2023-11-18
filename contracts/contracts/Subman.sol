@@ -33,8 +33,17 @@ contract SubMan is SubVerifier, ReentrancyGuard {
         return _subPlans[_subPlanId];
     }
 
-    function getSubPlansByOwner(address _owner) public view returns (uint256[] memory) {
+    function getSubPlanIdsByOwner(address _owner) public view returns (uint256[] memory) {
         return _subPlansByOwner[_owner];
+    }
+
+    function getSubPlansByOwner(address _owner) public view returns (LibSub.SubPlan[] memory) {
+        uint256[] memory _subPlanIds = getSubPlanIdsByOwner(_owner);
+        LibSub.SubPlan[] memory subPlansByOwner = new LibSub.SubPlan[](_subPlanIds.length);
+        for (uint256 i = 0; i < _subPlanIds.length; i++) {
+            subPlansByOwner[i] = getSubPlan(_subPlanIds[i]);
+        }
+        return subPlansByOwner;
     }
 
     function getSubedPlans(address _subscriber) public view returns (uint256[] memory) {
@@ -101,9 +110,9 @@ contract SubMan is SubVerifier, ReentrancyGuard {
             paymentToken: _paymentToken,
             price: _price,
             duration: _duration,
-            deadline: block.timestamp + _duration,
             subPlanId: subPlanCount,
             serviceFee: _serviceFee,
+            chainId: block.chainid,
             active: true
         });
 
@@ -116,7 +125,6 @@ contract SubMan is SubVerifier, ReentrancyGuard {
         LibSub.SubPlan storage _subPlan = _subPlans[_subPlanId];
         require(_subPlan.owner == msg.sender, "SubMan: caller is not the owner");
         require(!_subPlan.active, "SubMan: subPlan is already active");
-        require(_subPlan.deadline >= block.timestamp, "SubMan: subPlan is expired");
         
         _subPlan.active = true;
 
@@ -127,7 +135,6 @@ contract SubMan is SubVerifier, ReentrancyGuard {
         LibSub.SubPlan storage _subPlan = _subPlans[_subPlanId];
         require(_subPlan.owner == msg.sender, "SubMan: caller is not the owner");
         require(_subPlan.active, "SubMan: subPlan is not active");
-        require(_subPlan.deadline >= block.timestamp, "SubMan: subPlan is expired");
 
         _subPlan.active = false;
 
@@ -144,7 +151,6 @@ contract SubMan is SubVerifier, ReentrancyGuard {
         LibSub.SubPlan memory _subPlan = _subPlans[_subPayment.subPlanId];
         uint256 newDeadline = block.timestamp + _subPlan.duration;
         require(_subPlan.active, "SubMan: subPlan is not active");
-        require(_subPlan.deadline >= newDeadline, "SubMan: subPlan is expired");
         require(_subPayment.endTime >= newDeadline, "SubMan: signature is expired");
         require(_subPlan.paymentToken == _subPayment.paymentToken, "SubMan: invalid signed data (paymentToken)");
         require(_subPlan.duration == _subPayment.duration, "SubMan: invalid signed data (duration)");

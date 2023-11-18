@@ -15,9 +15,9 @@ library LibSub {
         address paymentToken;
         uint256 price;
         uint256 duration;
-        uint256 deadline;
         uint256 subPlanId;
         uint256 serviceFee;
+        uint256 chainId;
         bool active;
     }
 

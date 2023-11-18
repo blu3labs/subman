@@ -261,17 +261,17 @@
             },
             {
               "internalType": "uint256",
-              "name": "deadline",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
               "name": "subPlanId",
               "type": "uint256"
             },
             {
               "internalType": "uint256",
               "name": "serviceFee",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "chainId",
               "type": "uint256"
             },
             {
@@ -337,17 +337,17 @@
             },
             {
               "internalType": "uint256",
-              "name": "deadline",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
               "name": "subPlanId",
               "type": "uint256"
             },
             {
               "internalType": "uint256",
               "name": "serviceFee",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "chainId",
               "type": "uint256"
             },
             {
@@ -413,17 +413,17 @@
             },
             {
               "internalType": "uint256",
-              "name": "deadline",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
               "name": "subPlanId",
               "type": "uint256"
             },
             {
               "internalType": "uint256",
               "name": "serviceFee",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "chainId",
               "type": "uint256"
             },
             {
@@ -673,17 +673,17 @@
                 },
                 {
                   "internalType": "uint256",
-                  "name": "deadline",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "uint256",
                   "name": "subPlanId",
                   "type": "uint256"
                 },
                 {
                   "internalType": "uint256",
                   "name": "serviceFee",
+                  "type": "uint256"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "chainId",
                   "type": "uint256"
                 },
                 {
@@ -759,17 +759,17 @@
             },
             {
               "internalType": "uint256",
-              "name": "deadline",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
               "name": "subPlanId",
               "type": "uint256"
             },
             {
               "internalType": "uint256",
               "name": "serviceFee",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "chainId",
               "type": "uint256"
             },
             {
@@ -794,12 +794,88 @@
           "type": "address"
         }
       ],
-      "name": "getSubPlansByOwner",
+      "name": "getSubPlanIdsByOwner",
       "outputs": [
         {
           "internalType": "uint256[]",
           "name": "",
           "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_owner",
+          "type": "address"
+        }
+      ],
+      "name": "getSubPlansByOwner",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "title",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "paymentReceiver",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "paymentToken",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "price",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "duration",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "subPlanId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "serviceFee",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "chainId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "active",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct LibSub.SubPlan[]",
+          "name": "",
+          "type": "tuple[]"
         }
       ],
       "stateMutability": "view",
@@ -977,4 +1053,4 @@
       "stateMutability": "view",
       "type": "function"
     }
-  ],
+  ]

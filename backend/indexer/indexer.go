@@ -82,13 +82,13 @@ func index(chain *types.Chain) ([]mongo.WriteModel, error) {
 	}
 	models = append(models, paymentCanceledModels...)
 
-	planActivatedModels, err := indexPlanActivated(ctr, filter)
+	planActivatedModels, err := indexPlanActivated(ctr, filter, chain.ChainID)
 	if err != nil {
 		return models, err
 	}
 	models = append(models, planActivatedModels...)
 
-	planDeactivatedModels, err := indexPlanDeactivated(ctr, filter)
+	planDeactivatedModels, err := indexPlanDeactivated(ctr, filter, chain.ChainID)
 	if err != nil {
 		return models, err
 	}
@@ -149,7 +149,7 @@ func indexPaymentCanceled(ctr *contract.ContractFilterer, filter bind.FilterOpts
 	return models, nil
 }
 
-func indexPlanActivated(ctr *contract.ContractFilterer, filter bind.FilterOpts) ([]mongo.WriteModel, error) {
+func indexPlanActivated(ctr *contract.ContractFilterer, filter bind.FilterOpts, chainId uint64) ([]mongo.WriteModel, error) {
 	var models []mongo.WriteModel
 	iterator, err := ctr.FilterSubPlanActivated(&filter)
 	if err != nil {
@@ -168,14 +168,14 @@ func indexPlanActivated(ctr *contract.ContractFilterer, filter bind.FilterOpts) 
 	}
 	if len(plans) > 0 {
 		for _, plan := range plans {
-			model := database.NewActivatedModel(plan)
+			model := database.NewActivatedModel(plan, chainId)
 			models = append(models, model)
 		}
 	}
 	return models, nil
 }
 
-func indexPlanDeactivated(ctr *contract.ContractFilterer, filter bind.FilterOpts) ([]mongo.WriteModel, error) {
+func indexPlanDeactivated(ctr *contract.ContractFilterer, filter bind.FilterOpts, chainId uint64) ([]mongo.WriteModel, error) {
 	var models []mongo.WriteModel
 	iterator, err := ctr.FilterSubPlanDeactivated(&filter)
 	if err != nil {
@@ -194,7 +194,7 @@ func indexPlanDeactivated(ctr *contract.ContractFilterer, filter bind.FilterOpts
 	}
 	if len(plans) > 0 {
 		for _, plan := range plans {
-			model := database.NewDeactivatedModel(plan)
+			model := database.NewDeactivatedModel(plan, chainId)
 			models = append(models, model)
 		}
 	}
