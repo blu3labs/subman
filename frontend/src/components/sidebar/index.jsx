@@ -1,4 +1,6 @@
 import React from "react";
+import { Heading } from '@ensdomains/thorin'
+import Wallet from "./components/wallet";
 import "./index.css";
 
 function Sidebar() {
@@ -34,9 +36,11 @@ function Sidebar() {
     <div className="sidebarWrapper">
       <div className="sidebar">
         <div className="sidebarTop">
-          <div className="sidebarHeader">
+          {/* <div className="sidebarHeader">
             <span>Subman</span>
-          </div>
+          </div> */}
+          <Heading>Subman</Heading>
+
           <div className="sidebarBody">
             {true && (
               <div className="sidebarSubsWrapper">
@@ -71,7 +75,7 @@ function Sidebar() {
             )}
           </div>
         </div>
-        <div className="sidebarBottom">wallet connect</div>
+        <Wallet />
       </div>
     </div>
   );
