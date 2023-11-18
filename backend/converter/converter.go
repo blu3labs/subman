@@ -2,25 +2,25 @@ package converter
 
 import (
 	"strconv"
-	types "subman/common"
 	contract "subman/contract"
+	types "subman/types"
 )
 
 // ConvertToType converts contract.SubPayment to types.
 func ConvertToType(ctrSubPay contract.LibSubSubPayment) (types.SubPayment, error) {
-	subPlanId, err := strconv.ParseInt(ctrSubPay.SubPlanId.String(), 10, 64)
+	subPlanId, err := strconv.ParseUint(ctrSubPay.SubPlanId.String(), 10, 64)
 	if err != nil {
 		return types.SubPayment{}, err
 	}
-	startTime, err := strconv.ParseInt(ctrSubPay.StartTime.String(), 10, 64)
+	startTime, err := strconv.ParseUint(ctrSubPay.StartTime.String(), 10, 64)
 	if err != nil {
 		return types.SubPayment{}, err
 	}
-	endTime, err := strconv.ParseInt(ctrSubPay.EndTime.String(), 10, 64)
+	endTime, err := strconv.ParseUint(ctrSubPay.EndTime.String(), 10, 64)
 	if err != nil {
 		return types.SubPayment{}, err
 	}
-	duration, err := strconv.ParseInt(ctrSubPay.Duration.String(), 10, 64)
+	duration, err := strconv.ParseUint(ctrSubPay.Duration.String(), 10, 64)
 	if err != nil {
 		return types.SubPayment{}, err
 	}
