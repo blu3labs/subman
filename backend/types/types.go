@@ -8,9 +8,6 @@ type SubPayment struct {
 	Duration     uint64 `json:"duration" bson:"duration"`
 	PaymentToken string `json:"paymentToken" bson:"paymentToken"`
 	Price        string `json:"price" bson:"price"`
-	// SubDeadline  uint64 `json:"subDeadline" bson:"subDeadline"`
-	// PlanActive   bool   `json:"deactivated" bson:"deactivated"`
-	// Cancelled    bool   `json:"cancelled" bson:"cancelled"`
 }
 
 type Subscription struct {
