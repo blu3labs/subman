@@ -39,13 +39,13 @@ abstract contract SubVerifier is EIP712 {
                     _hashTypedDataV4(_hash),
                     _signature
                 ) == MAGICVALUE,
-                "ERC1271 ticket signature verification error"
+                "SubVerifier: ERC1271 ticket signature verification error"
             );
         } else {
             if (_hashTypedDataV4(_hash).recover(_signature) != _signer) {
-                revert("ECDSA ticket signature verification error");
+                revert("SubVerifier: ECDSA ticket signature verification error");
             } else {
-                require(_signer != address(0), "Invalid owner");
+                require(_signer != address(0), "SubVerifier: Invalid owner");
             }
         }
     }

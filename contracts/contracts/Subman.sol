@@ -4,12 +4,15 @@ pragma solidity 0.8.23;
 
 import {EnumerableSet} from "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import {LibSub} from "./libraries/LibSub.sol";
 import {SubVerifier} from "./SubVerifier.sol";
 
 contract SubMan is SubVerifier, ReentrancyGuard {
     using EnumerableSet for EnumerableSet.UintSet;
     using LibSub for LibSub.SubPayment;
+    using SafeERC20 for IERC20;
 
     uint256 public subPlanCount;
 
@@ -99,8 +102,9 @@ contract SubMan is SubVerifier, ReentrancyGuard {
             price: _price,
             duration: _duration,
             deadline: block.timestamp + _duration,
-            active: true,
-            serviceFee: _serviceFee
+            subPlanId: subPlanCount,
+            serviceFee: _serviceFee,
+            active: true
         });
 
         _subPlansByOwner[msg.sender].push(subPlanCount);
@@ -132,7 +136,8 @@ contract SubMan is SubVerifier, ReentrancyGuard {
 
     function processPayment(
         LibSub.SubPayment memory _subPayment,
-        bytes memory _signature
+        bytes memory _signature,
+        address _serviceFeeReceiver
     ) external nonReentrant {
         verify(_subPayment, _signature);
         require(_subPayment.startTime > block.timestamp, "SubMan: startTime must be greater than current time");
@@ -141,11 +146,25 @@ contract SubMan is SubVerifier, ReentrancyGuard {
         require(_subPlan.active, "SubMan: subPlan is not active");
         require(_subPlan.deadline >= newDeadline, "SubMan: subPlan is expired");
         require(_subPayment.endTime >= newDeadline, "SubMan: signature is expired");
+        require(_subPlan.paymentToken == _subPayment.paymentToken, "SubMan: invalid signed data (paymentToken)");
+        require(_subPlan.duration == _subPayment.duration, "SubMan: invalid signed data (duration)");
         require(_subPlan.price == _subPayment.price, "SubMan: subPlan price changed");
         require(_userSubDeadline[_subPayment.subscriber][_subPayment.subPlanId] < block.timestamp, "SubMan: user already subscribed");
 
         _subedPlans[_subPayment.subscriber].add(_subPayment.subPlanId);
         _userSubDeadline[_subPayment.subscriber][_subPayment.subPlanId] = newDeadline;
+
+        IERC20(_subPlan.paymentToken).safeTransferFrom(
+            _subPayment.subscriber,
+            _subPlan.paymentReceiver,
+            _subPlan.price - _subPlan.serviceFee
+        );
+
+        IERC20(_subPlan.paymentToken).safeTransferFrom(
+            _subPayment.subscriber,
+            _serviceFeeReceiver,
+            _subPlan.serviceFee
+        );
 
         emit SubPaymentProcessed(_subPayment, newDeadline);
     }

@@ -4,7 +4,7 @@ pragma solidity 0.8.23;
 
 library LibSub {
     bytes32 constant SUB_PAYMENT_TYPEHASH = keccak256(
-        "SubPayment(uint256 subPlanId,address subscriber,uint256 startTime,uint256 endTime,uint256 price)"
+        "SubPayment(uint256 subPlanId,address subscriber,uint256 startTime,uint256 endTime,uint256 duration,address paymentToken,uint256 price)"
     );
 
     struct SubPlan {
@@ -16,8 +16,9 @@ library LibSub {
         uint256 price;
         uint256 duration;
         uint256 deadline;
-        bool active;
+        uint256 subPlanId;
         uint256 serviceFee;
+        bool active;
     }
 
     struct SubPayment {
@@ -25,6 +26,8 @@ library LibSub {
         address subscriber;
         uint256 startTime;
         uint256 endTime;
+        uint256 duration;
+        address paymentToken;
         uint256 price;
     }
 
@@ -40,6 +43,8 @@ library LibSub {
             _subPayment.subscriber,
             _subPayment.startTime,
             _subPayment.endTime,
+            _subPayment.duration,
+            _subPayment.paymentToken,
             _subPayment.price
         ));
     }
