@@ -34,3 +34,12 @@ func ConvertToType(ctrSubPay contract.LibSubSubPayment) (types.SubPayment, error
 		Price:        ctrSubPay.Price.String(),
 	}, nil
 }
+
+// func ConvertToProcessed(subPay types.SubPayment, ) types.Subscription {
+// 	return types.Subscription{
+// 		SubPayment:  subPay,
+// 		SubDeadline: subPay.EndTime,
+// 		PlanActive:  true,
+// 		Cancelled:   false,
+// 	}
+// }

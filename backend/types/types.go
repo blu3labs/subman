@@ -1,19 +1,28 @@
 package types
 
 type SubPayment struct {
-	SubPlanID    uint64 `json:"sub_plan_id" bson:"sub_plan_id"`
+	SubPlanID    uint64 `json:"subPlanId" bson:"subPlanId"`
 	Subscriber   string `json:"subscriber" bson:"subscriber"`
-	StartTime    uint64 `json:"start_time" bson:"start_time"`
-	EndTime      uint64 `json:"end_time" bson:"end_time"`
+	StartTime    uint64 `json:"startTime" bson:"startTime"`
+	EndTime      uint64 `json:"endTime" bson:"endTime"`
 	Duration     uint64 `json:"duration" bson:"duration"`
-	PaymentToken string `json:"payment_token" bson:"payment_token"`
+	PaymentToken string `json:"paymentToken" bson:"paymentToken"`
 	Price        string `json:"price" bson:"price"`
-	SubDeadline  uint64 `json:"sub_deadline" bson:"sub_deadline"`
+	// SubDeadline  uint64 `json:"subDeadline" bson:"subDeadline"`
+	// PlanActive   bool   `json:"deactivated" bson:"deactivated"`
+	// Cancelled    bool   `json:"cancelled" bson:"cancelled"`
+}
+
+type Subscription struct {
+	SubPayment  SubPayment `json:"subPayment" bson:"subPayment"`
+	SubDeadline uint64     `json:"subDeadline" bson:"subDeadline"`
+	PlanActive  bool       `json:"planActive" bson:"planActive"`
+	Cancelled   bool       `json:"cancelled" bson:"cancelled"`
 }
 
 type LastIndexedBlock struct {
-	ChainID   uint64 `json:"chain_id" bson:"chain_id"`
-	LastBlock uint64 `json:"last_indexed_block" bson:"last_indexed_block"`
+	ChainID   uint64 `json:"chainId" bson:"chainId"`
+	LastBlock uint64 `json:"lastBlock" bson:"lastBlock"`
 }
 
 type Chain struct {
