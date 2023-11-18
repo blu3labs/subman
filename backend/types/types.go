@@ -15,9 +15,11 @@ type SubPayment struct {
 
 type Subscription struct {
 	SubPayment  SubPayment `json:"subPayment" bson:"subPayment"`
+	ChainID     uint64     `json:"chainId" bson:"chainId"`
 	SubDeadline uint64     `json:"subDeadline" bson:"subDeadline"`
 	PlanActive  bool       `json:"planActive" bson:"planActive"`
 	Cancelled   bool       `json:"cancelled" bson:"cancelled"`
+	Signature   string     `json:"signature" bson:"signature"`
 }
 
 type LastIndexedBlock struct {

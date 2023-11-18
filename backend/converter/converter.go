@@ -6,7 +6,6 @@ import (
 	types "subman/types"
 )
 
-// ConvertToType converts contract.SubPayment to types.
 func ConvertToType(ctrSubPay contract.LibSubSubPayment) (types.SubPayment, error) {
 	subPlanId, err := strconv.ParseUint(ctrSubPay.SubPlanId.String(), 10, 64)
 	if err != nil {
@@ -34,12 +33,3 @@ func ConvertToType(ctrSubPay contract.LibSubSubPayment) (types.SubPayment, error
 		Price:        ctrSubPay.Price.String(),
 	}, nil
 }
-
-// func ConvertToProcessed(subPay types.SubPayment, ) types.Subscription {
-// 	return types.Subscription{
-// 		SubPayment:  subPay,
-// 		SubDeadline: subPay.EndTime,
-// 		PlanActive:  true,
-// 		Cancelled:   false,
-// 	}
-// }
