@@ -15,7 +15,7 @@ type Subscription struct {
 	ChainID     uint64     `json:"chainId" bson:"chainId"`
 	SubDeadline uint64     `json:"subDeadline" bson:"subDeadline"`
 	PlanActive  bool       `json:"planActive" bson:"planActive"`
-	Cancelled   bool       `json:"cancelled" bson:"cancelled"`
+	Canceled    bool       `json:"canceled" bson:"canceled"`
 	Signature   string     `json:"signature" bson:"signature"`
 }
 

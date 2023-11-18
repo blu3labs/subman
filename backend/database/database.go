@@ -59,7 +59,7 @@ func GetExecuteableSubscriptions() ([]types.Subscription, error) {
 	filter := bson.M{
 		"subscrioption.subDeadline":        bson.M{"$lt": now},
 		"subscrioption.subPayment.endTime": bson.M{"$gt": now},
-		"subscrioption.planActive":         true, "subscrioption.cancelled": false,
+		"subscrioption.planActive":         true, "subscrioption.canceled": false,
 	}
 	cursor, err := subscriptions.Find(ctx, filter)
 	if err != nil {
@@ -95,7 +95,7 @@ func NewDeadlineModel(subPay types.SubPayment, newDeadline uint64) mongo.WriteMo
 
 func NewCanceledModel(subPay types.SubPayment) mongo.WriteModel {
 	filter := filterPayment(subPay)
-	return mongo.NewUpdateOneModel().SetFilter(filter).SetUpdate(bson.M{"$set": bson.M{"cancelled": true}})
+	return mongo.NewUpdateOneModel().SetFilter(filter).SetUpdate(bson.M{"$set": bson.M{"canceled": true}})
 }
 
 func NewActivatedModel(subPlanId uint64) mongo.WriteModel {
@@ -127,7 +127,7 @@ func filterSubscription(s types.Subscription) bson.M {
 		"subscrioption.chainId":     s.ChainID,
 		"subscrioption.subDeadline": s.SubDeadline,
 		"subscrioption.planActive":  s.PlanActive,
-		"subscrioption.cancelled":   s.Cancelled,
+		"subscrioption.canceled":    s.Canceled,
 		"subscrioption.signature":   s.Signature,
 	}
 	return filter
