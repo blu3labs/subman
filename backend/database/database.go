@@ -64,7 +64,7 @@ func GetExecuteableSubscriptions() ([]types.Subscription, error) {
 	filter := bson.M{
 		"subDeadline":        bson.M{"$lt": now},
 		"subPayment.endTime": bson.M{"$gt": now},
-		"planActive":         true, "subscription.canceled": false,
+		"planActive":         true, "canceled": false,
 	}
 	cursor, err := subscriptions.Find(ctx, filter)
 	if err != nil {
