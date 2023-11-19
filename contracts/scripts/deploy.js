@@ -6,6 +6,11 @@ async function main() {
   await subMan.waitForDeployment();
   const address = await subMan.getAddress();
   console.log("SubMan deployed to:", address);
+
+  await hre.run("verify:verify", {
+    address: address,
+    constructorArguments: ["SubMan", "1"],
+  });
 }
 
 main().catch((error) => {
