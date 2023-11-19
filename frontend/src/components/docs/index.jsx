@@ -1,8 +1,8 @@
 import React from "react";
 import { Banner } from "@ensdomains/thorin";
 import "./index.css";
-import { Subman } from "subman-plugin";
-
+// import { Subman } from "subman-plugin";
+import { Subman } from "../../../../plugin";
 
 function Docs() {
   return (
@@ -23,11 +23,9 @@ function Docs() {
       <br />
       <br />
       <Subman
-        subscriptionId="hasgdjhdas"
-        chainId="97"
+        chainId={534351}
+        planId={3}
         showPrice
-        backgroundColor="#ffff80"
-        textColor="blue"
       />
       <br />
       <br />

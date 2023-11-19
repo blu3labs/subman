@@ -1,0 +1,1 @@
+export const api = "https://blu3labs-subman-backend.blu3.app/"

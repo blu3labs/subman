@@ -9,12 +9,11 @@ import { ThorinGlobalStyles, lightTheme } from "@ensdomains/thorin";
 
 import { createWeb3Modal, defaultWagmiConfig } from "@web3modal/wagmi/react";
 import { WagmiConfig } from "wagmi";
-import { arbitrum, mainnet, bsc , baseGoerli } from "wagmi/chains";
+import {  baseGoerli, scrollSepolia } from "wagmi/chains";
 
-// 1. Get projectIz
+
 const projectId = "cfe6a84206725199dbc2e6b7b8ffbccc"; // blu3 - hackathon
 
-// 2. Create wagmiConfig
 const metadata = {
   name: "Web3Modal",
   description: "Web3Modal Example",
@@ -22,10 +21,9 @@ const metadata = {
   icons: ["https://avatars.githubusercontent.com/u/37784886"],
 };
 
-const chains = [mainnet, arbitrum, bsc, baseGoerli];
+const chains = [ baseGoerli,scrollSepolia];
 const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata });
 
-// 3. Create modal
 createWeb3Modal({ wagmiConfig, projectId, chains, themeMode: "light" });
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -13,11 +13,13 @@
     "@ensdomains/thorin": "^0.6.44",
     "@web3modal/wagmi": "^3.3.2",
     "ethereum-blockies": "^0.1.1",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
     "react-transition-state": "^2.1.1",
     "styled-components": "^6.1.1",
-    "subman-plugin": "^1.0.7",
+    "subman-plugin": "^1.0.8",
     "wagmi": "^1.4.7"
   },
   "devDependencies": {

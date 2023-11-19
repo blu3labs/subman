@@ -5,3 +5,15 @@
     align-items: flex-end;
     gap: 8px;
 }
+
+.subDescription{
+    text-align: justify;
+}
+
+.ownSubModalInfo{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}

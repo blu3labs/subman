@@ -1,11 +1,10 @@
 import React from "react";
 import { useAccount, useEnsAvatar, useEnsName, useNetwork } from "wagmi";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
-import { chainLogo } from "@/utils/chainLogo";
 import { Button, LockSVG, Profile, Modal } from "@ensdomains/thorin";
 import blockies from "ethereum-blockies";
-import "./index.css";
 import CreateSub from "../createSub";
+import "./index.css";
 
 function Wallet() {
   let { address, isConnected } = useAccount();
@@ -52,15 +51,7 @@ function Wallet() {
         <Button
           onClick={() => open({ view: "Networks" })}
           colorStyle="greenSecondary"
-          prefix={
-            chainLogo[chain?.id] && (
-              <img
-                src={chainLogo[chain?.id]}
-                alt="chain"
-                className="networkIcon"
-              />
-            )
-          }
+          
         >
           {chain?.name}
         </Button>
