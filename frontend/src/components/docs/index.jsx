@@ -55,8 +55,6 @@ function Docs() {
           </div>
         </div>
 
-      
-
         <div className="docsInfoArea">
           <div className="docsInfoAreaTitle">Usage</div>
           <div className="docsInfoBox">
@@ -68,7 +66,13 @@ function Docs() {
         </div>
 
         <div className="docsDesc">
-           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus sed, laudantium repudiandae deserunt exercitationem nesciunt possimus quidem, iusto cupiditate, obcaecati quos cumque nobis repellat consequuntur tempore recusandae aspernatur placeat dolores quasi animi porro eos consequatur natus consectetur. Voluptatem odio, repudiandae amet similique sapiente aspernatur exercitationem?
+          Introducing an advanced open-source subscription management app for
+          React websites. Create personalized plans with custom titles,
+          descriptions, billing cycles, and prices, all with a user-friendly
+          modal interface. The system allows flexible service fee adjustments
+          for optimized profitability, and subscribers can easily cancel anytime
+          without extra charges. A tech-savvy, visually appealing solution for
+          seamless integration and enhanced user experience.
         </div>
 
         <div className="docsInfoArea">
