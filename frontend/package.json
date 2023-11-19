@@ -19,7 +19,7 @@
     "react-hot-toast": "^2.4.1",
     "react-transition-state": "^2.1.1",
     "styled-components": "^6.1.1",
-    "subman-plugin": "^1.0.8",
+    "subman-plugin": "^1.0.9",
     "wagmi": "^1.4.7"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 {
   "name": "subman-plugin",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Subman Plugin",
   "main": "index.jsx",
   "scripts": {

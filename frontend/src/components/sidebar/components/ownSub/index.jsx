@@ -23,8 +23,7 @@ function OwnSub({ item }) {
 
 
 
-  //todo chainId
-  let currency = currencyAddress?.[534_351]?.filter(
+  let currency = currencyAddress?.[item?.chainId]?.filter(
     (item_) => item_?.address === item?.paymentToken
   )?.[0];
 

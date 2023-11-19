@@ -23,8 +23,8 @@ function Docs() {
       <br />
       <br />
       <Subman
-        chainId={534351}
-        planId={3}
+        chainId={84531}
+        planId={1}
         showPrice
       />
       <br />
