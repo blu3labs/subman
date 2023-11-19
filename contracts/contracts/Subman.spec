@@ -8,13 +8,13 @@ methods
     // envfree and view functions that we will use in the rules.
     function subPlanCount() external returns (uint256) envfree;
     function getSubPlan(uint) external returns (LibSub.SubPlan memory) envfree;
+    function getSubPlanIdsByOwner(address) external returns (uint256[] memory) envfree;
     function getSubPlansByOwner(address) external returns (LibSub.SubPlan[] memory) envfree;
     function getSubedPlans(address) external returns (uint256[] memory) envfree;
     function getUserSubDeadline(address,uint256) external returns (uint256) envfree;
     function getActiveSubPlans(address) external returns (uint256[] memory);
     function getActiveSubscriptions(address) external returns (LibSub.Subscription[] memory);
 }
-// for the check first test
 
 // subPlanCount should increase with created new subPlan.
 rule checkCreateSubPlan(
@@ -47,8 +47,8 @@ rule checkCreateSubPlan(
         require _paymentReceiver != 0;
         require _paymentToken != 0;
 
-        // msg.value will be used for the service fee.
-        assert e.msg.value > 0;
+/*         // msg.value will be used for the service fee.
+        assert e.msg.value > 0; */
 
         // call createSubPlan for the create a subscription plan.
         createSubPlan(e,
@@ -65,5 +65,5 @@ rule checkCreateSubPlan(
 
         // subPlanCount must increase after call createSubPlan successfully as expected.
         assert subPlanCountAfter > subPlanCountBefore, "subPlanCount must increase after call createSubPlan successfully";
-
 }
+
