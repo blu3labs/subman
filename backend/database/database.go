@@ -62,9 +62,9 @@ func GetExecuteableSubscriptions() ([]types.Subscription, error) {
 	var executeableSubscriptions []types.Subscription
 	now := time.Now().Unix()
 	filter := bson.M{
-		"subscription.subDeadline":        bson.M{"$lt": now},
-		"subscription.subPayment.endTime": bson.M{"$gt": now},
-		"subscription.planActive":         true, "subscription.canceled": false,
+		"subDeadline":        bson.M{"$lt": now},
+		"subPayment.endTime": bson.M{"$gt": now},
+		"planActive":         true, "subscription.canceled": false,
 	}
 	cursor, err := subscriptions.Find(ctx, filter)
 	if err != nil {
@@ -104,36 +104,36 @@ func NewCanceledModel(subPay types.SubPayment) mongo.WriteModel {
 }
 
 func NewActivatedModel(subPlanId uint64, chainId uint64) mongo.WriteModel {
-	filter := bson.M{"subscription.subPayment.subPlanId": subPlanId, "subscription.chainId": chainId}
+	filter := bson.M{"subPayment.subPlanId": subPlanId, "subscription.chainId": chainId}
 	return mongo.NewUpdateOneModel().SetFilter(filter).SetUpdate(bson.M{"$set": bson.M{"planActive": true}})
 }
 
 func NewDeactivatedModel(subPlanId uint64, chainId uint64) mongo.WriteModel {
-	filter := bson.M{"subscription.subPayment.subPlanId": subPlanId, "subscription.chainId": chainId}
+	filter := bson.M{"subPayment.subPlanId": subPlanId, "subscription.chainId": chainId}
 	return mongo.NewUpdateOneModel().SetFilter(filter).SetUpdate(bson.M{"$set": bson.M{"planActive": false}})
 }
 
 func filterPayment(subPay types.SubPayment) bson.M {
 	filter := bson.M{
-		"subscription.subPayment.subPlanId":    subPay.SubPlanID,
-		"subscription.subPayment.subscriber":   subPay.Subscriber,
-		"subscription.subPayment.startTime":    subPay.StartTime,
-		"subscription.subPayment.endTime":      subPay.EndTime,
-		"subscription.subPayment.duration":     subPay.Duration,
-		"subscription.subPayment.paymentToken": subPay.PaymentToken,
-		"subscription.subPayment.price":        subPay.Price,
+		"subPayment.subPlanId":    subPay.SubPlanID,
+		"subPayment.subscriber":   subPay.Subscriber,
+		"subPayment.startTime":    subPay.StartTime,
+		"subPayment.endTime":      subPay.EndTime,
+		"subPayment.duration":     subPay.Duration,
+		"subPayment.paymentToken": subPay.PaymentToken,
+		"subPayment.price":        subPay.Price,
 	}
 	return filter
 }
 
 func filterSubscription(s types.Subscription) bson.M {
 	filter := bson.M{
-		"subscription.subPayment":  s.SubPayment,
-		"subscription.chainId":     s.ChainID,
-		"subscription.subDeadline": s.SubDeadline,
-		"subscription.planActive":  s.PlanActive,
-		"subscription.canceled":    s.Canceled,
-		"subscription.signature":   s.Signature,
+		"subPayment":  s.SubPayment,
+		"chainId":     s.ChainID,
+		"subDeadline": s.SubDeadline,
+		"planActive":  s.PlanActive,
+		"canceled":    s.Canceled,
+		"signature":   s.Signature,
 	}
 	return filter
 }

@@ -153,7 +153,7 @@ contract SubMan is SubVerifier, ReentrancyGuard {
         require(_subPayment.endTime >= newDeadline, "SubMan: signature is expired");
         require(_subPlan.paymentToken == _subPayment.paymentToken, "SubMan: invalid signed data (paymentToken)");
         require(_subPlan.duration == _subPayment.duration, "SubMan: invalid signed data (duration)");
-        require(_subPlan.price == _subPayment.price, "SubMan: subPlan price changed");
+        require(_subPlan.price == _subPayment.price, "SubMan: subPlan price different");
         require(_userSubDeadline[_subPayment.subscriber][_subPayment.subPlanId] < block.timestamp, "SubMan: user already subscribed");
 
         _subedPlans[_subPayment.subscriber].add(_subPayment.subPlanId);
