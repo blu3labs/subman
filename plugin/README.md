@@ -11,5 +11,11 @@ npm install subman-plugin
 ```js
 import { Subman } from "subman-plugin";
 
-<Subman />
+<Subman 
+    planId={1}
+    chainId={84_531}
+    showPrize={true}
+    backgroundColor="#00a9ff"
+    textColor="#fff"
+/>
 ```

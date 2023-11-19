@@ -7,6 +7,7 @@ import OwnSub from "./components/ownSub";
 import { getAddress } from "../../utils/getAddress";
 import { submanAbi, submanAddress } from "../../contract";
 import { readContract } from "../../utils/readContract";
+import Logo from "@/assets/logo.png";
 
 function Sidebar() {
   const address = getAddress();
@@ -116,12 +117,17 @@ function Sidebar() {
     <div className="sidebarWrapper">
       <div className="sidebar">
         <div className="sidebarTop">
-          <Heading>Subman</Heading>
+          <div className="header">
+            <img src={Logo} alt="logo" draggable="false" className="headerLogo"/>
+            <span className="headerLogoText">
+              SUBMAN
+            </span>
+          </div>
 
           <div className="sidebarBody">
             {activeSubs && activeSubs?.length > 0 && (
               <div className="sidebarSubsWrapper">
-                <div className="sidebarSubsTitle">Subscribed</div>
+                <div className="sidebarSubsTitle">Your Subscriptions</div>
                 <div className="sidebarSubsItems">
                   {activeSubs?.map((item, index) => (
                     <Sub key={index} item={item?.subPlan} deadline={item?.deadline} />
@@ -132,7 +138,9 @@ function Sidebar() {
 
             {subPlansByOwner && subPlansByOwner?.length > 0 && (
               <div className="sidebarSubsWrapper">
-                <div className="sidebarSubsTitle">Your Subscribed Plans</div>
+                <div className="sidebarSubsTitle">
+                    Your Subscription Plans
+                  </div>
                 <div className="sidebarSubsItems">
                   {subPlansByOwner?.map((item, index) => (
                     <OwnSub key={index} item={item} />

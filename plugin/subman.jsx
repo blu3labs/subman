@@ -15,15 +15,11 @@ import axios from "axios";
 const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
   const [visible, setVisible] = useState(false);
 
-
-
   const signer = useSigner();
 
   const { address } = useAccount();
 
   const { switchNetworkAsync } = useSwitchNetwork();
-
-
 
   showPrice = showPrice ?? false;
 
@@ -57,8 +53,6 @@ const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
 
       let res = await readContract(context);
 
-    
-
       setData(res);
     } catch (e) {
       console.log(e);
@@ -85,8 +79,6 @@ const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
 
       let res = await readContract(context);
 
-
-
       let timestamp = res?.toString(10);
       let now = Date.now() / 1000;
 
@@ -109,24 +101,19 @@ const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
 
     let interval = setInterval(() => {
       getData();
-    }
-    , 10_000);
+    }, 10_000);
 
     return () => clearInterval(interval);
   }, [planId, chainId]);
-
-
 
   useEffect(() => {
     getUserData();
 
     let interval = setInterval(() => {
       getUserData();
-    }
-    , 10_000);
+    }, 10_000);
 
     return () => clearInterval(interval);
-
   }, [address, planId, chainId]);
 
   let buttonDisabled = data === null || data === false;
@@ -168,11 +155,7 @@ const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
         args: [address, submanAddress[Number(chainId)]],
       };
 
-   
-
       let res = await readContract(context);
-
-  
 
       setAllowance(res?.toString(10));
     } catch (e) {
@@ -186,8 +169,6 @@ const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
   }, [address, chainId]);
 
   const approveVisible = (value) => {
-
-  
     if (
       allowance == 0 ||
       allowance == "0" ||
@@ -200,7 +181,6 @@ const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
       return false;
     }
   };
-
 
   const types = {
     SubPayment: [
@@ -231,13 +211,9 @@ const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
       endTime: Math.floor(Date.now() / 1000) + week * 60,
       duration: parseFloat(data?.duration?.toString(10)),
       paymentToken: currency?.address,
-      price: ethers.utils.parseUnits(
-        subPrice?.toString(10),
-        currencyDecimals)
+      price: ethers.utils.parseUnits(subPrice?.toString(10), currencyDecimals),
     };
   };
-
-
 
   const [subscribeLoading, setSubscribeLoading] = useState(false);
   const [buttonName, setButtonName] = useState(null);
@@ -255,8 +231,6 @@ const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
       setAmount_(subPrice * week);
     }
   }, [week, subPrice]);
-
-
 
   const handleSubscribe = async () => {
     if (!signer) {
@@ -313,20 +287,17 @@ const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
 
       let signRes = await signer._signTypedData(domain_, types, values_);
 
-      let backRes = await axios.post(
-        api + "subscription",
-        {
-          subPayment: {
-            ...values_,
-            price: values_?.price?.toString(10),
-          },
-          chainId: parseFloat(chainId),
-          subDeadline: 0,
-          planActive: true,
-          canceled: false,
-          signature: signRes,
-        }
-      );
+      let backRes = await axios.post(api + "subscription", {
+        subPayment: {
+          ...values_,
+          price: values_?.price?.toString(10),
+        },
+        chainId: parseFloat(chainId),
+        subDeadline: 0,
+        planActive: true,
+        canceled: false,
+        signature: signRes,
+      });
 
       if (backRes?.status == 200) {
         toast.success("Subscribed Successfully");
@@ -351,11 +322,6 @@ const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
           background: backgroundColor ?? "#00a9ff;",
           color: textColor ?? "#fff",
         }}
-
-        // onClick={()=>
-
-        // toast.error("Please connect your wallet")
-        // }
       >
         {buttonText[buttonDisabled ? "undefined" : userIsSubscribed]}
       </button>
@@ -374,14 +340,7 @@ const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
             {userIsSubscribed && (
               <div className="subman-modal-endDate">
                 Your subscription will end on{" "}
-            
-                {
-                moment(
-                  userData * 1000
-                ).format(
-                  "DD MMM YYYY, hh:mm:ss A"
-                )
-              }
+                {moment(userData * 1000).format("DD MMM YYYY, hh:mm:ss A")}
               </div>
             )}
 
@@ -395,7 +354,6 @@ const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
                   placeholder="Ex. 1"
                   value={week}
                   onChange={(e) => setWeek(e.target.value)}
-             
                 />
                 <span>Week</span>
               </div>
@@ -403,12 +361,16 @@ const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
 
             {userIsSubscribed ? (
               <div className="subman-modal-buttons">
-                <button className="subman-modal-button" disabled
+                <button
+                  className="subman-modal-button"
+                  disabled
                   style={{
-                    cursor: "not-allowed" ,
-                    opacity: "0.5" ,
+                    cursor: "not-allowed",
+                    opacity: "0.5",
                   }}
-                >Extend</button>
+                >
+                  Extend
+                </button>
                 <button className="subman-modal-cancel-button">Cancel</button>
               </div>
             ) : (
