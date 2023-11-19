@@ -1,8 +1,8 @@
 import React from "react";
 import { Banner } from "@ensdomains/thorin";
 import "./index.css";
-// import { Subman } from "subman-plugin";
-import { Subman } from "../../../../plugin";
+import { Subman } from "subman-plugin";
+// import { Subman } from "../../../../plugin";
 
 function Docs() {
   return (
