@@ -79,7 +79,7 @@ function Docs() {
           <div className="docsInfoAreaTitle">View</div>
           <div className="docsInfoBoxButton">
             <a
-              href="https://www.npmjs.com/package/subman-plugin"
+              href="https://blu3labs-subman-test-frontend.blu3.app/"
               target="_blank"
             >
               View on Demo App
