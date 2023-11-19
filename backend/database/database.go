@@ -104,12 +104,12 @@ func NewCanceledModel(subPay types.SubPayment) mongo.WriteModel {
 }
 
 func NewActivatedModel(subPlanId uint64, chainId uint64) mongo.WriteModel {
-	filter := bson.M{"subPayment.subPlanId": subPlanId, "subscription.chainId": chainId}
+	filter := bson.M{"subPayment.subPlanId": subPlanId, "chainId": chainId}
 	return mongo.NewUpdateOneModel().SetFilter(filter).SetUpdate(bson.M{"$set": bson.M{"planActive": true}})
 }
 
 func NewDeactivatedModel(subPlanId uint64, chainId uint64) mongo.WriteModel {
-	filter := bson.M{"subPayment.subPlanId": subPlanId, "subscription.chainId": chainId}
+	filter := bson.M{"subPayment.subPlanId": subPlanId, "chainId": chainId}
 	return mongo.NewUpdateOneModel().SetFilter(filter).SetUpdate(bson.M{"$set": bson.M{"planActive": false}})
 }
 
