@@ -1,6 +1,6 @@
 import React from "react";
 import Wallet from "./wallet";
-import { Subman } from "subman-plugin";
+import { Subman } from "../../plugin";
 import "./index.css";
 
 function App() {
@@ -21,6 +21,7 @@ function App() {
         <Subman planId={1} chainId={534351} 
           backgroundColor={"#f0f0f0"}
           textColor={"#000000"}
+          showPrice={true}
         />
       </div>
     </div>

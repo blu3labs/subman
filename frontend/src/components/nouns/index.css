@@ -1,34 +1,38 @@
-.nouns{
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 40%;
-    height: 100vh;
-    z-index: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.nouns {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40%;
+  height: 100vh;
+  z-index: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
-
-
-
-.nouns img{
-    width: 90px;
-    height: auto;
-    object-fit: cover;
-    object-position: center;
-    align-self: center;
-    animation: moveupright 1s ease-in-out infinite;
+.nouns img {
+  width: 90px;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+  align-self: center;
+  animation: moveupright 1s ease-in-out infinite;
 }
 
-@keyframes moveupright{
-    0%{
-        transform: translate(0, 0);
-    }
-    50%{
-        transform: translate(0, -10px);
-    }
-    100%{
-        transform: translate(0, 0);
-    }
+@keyframes moveupright {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, -10px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.nounsLogo {
+  position: absolute;
+  left: 50px !important;
+  height: 350px !important;
+  width: auto !important;
 }
