@@ -25,3 +25,12 @@ Our frontend relies on ENS Thorin's UI components, covering every aspect of the 
 Web3Modal V3 manages wallet connectivity, and our npm-packaged plugin, designed with ENS Thorin, is ready for use, needing wagmi.sh for compatibility.
 
 We explored Certora's formal verification app during the hackathon, making strides in understanding its fundamentals and implementing a simple test in the repository.
+
+## Links
+
+Live Mainsite: https://blu3labs-subman-frontend.blu3.app/
+Subscription Tests: https://blu3labs-subman-test-frontend.blu3.app/
+npm Package: https://www.npmjs.com/package/subman-plugin
+Base Goerli Contract: https://goerli.basescan.org/address/0x502857caa5c74680dd628c7a02c2b268c4128a2a#code
+Scroll Sepolia Contract: https://sepolia.scrollscan.com/address/0x6d4A3FC0Ad60ecC6395d61bDd89B9db0EE647007#code
+Certora Link: https://prover.certora.com/output/35748/30349bb9655945ef926bc79ec4904d8a/?anonymousKey=8f8c0c21ab1c1c853ddbd3bbe850fd62f831c44e
