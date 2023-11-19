@@ -1,6 +1,6 @@
 import React from "react";
 import Wallet from "./wallet";
-import { Subman } from "../../plugin";
+import { Subman } from "subman-plugin";
 import "./index.css";
 
 function App() {
