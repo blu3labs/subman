@@ -211,7 +211,7 @@ const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
       subPlanId: planId,
       subscriber: address,
       startTime: Math.floor(Date.now() / 1000),
-      endTime: Math.floor(Date.now() / 1000) + week * 60,
+      endTime: Math.floor(Date.now() / 1000) + (week * parseFloat(data?.duration?.toString(10))),
       duration: parseFloat(data?.duration?.toString(10)),
       paymentToken: currency?.address,
       price: ethers.utils.parseUnits(subPrice?.toString(10), currencyDecimals),

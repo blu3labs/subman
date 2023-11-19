@@ -15,7 +15,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
-    "subman-plugin": "^1.1.4",
+    "subman-plugin": "^1.1.5",
     "wagmi": "^1.4.7"
   },
   "devDependencies": {
