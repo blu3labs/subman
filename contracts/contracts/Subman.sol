@@ -146,7 +146,7 @@ contract SubMan is SubVerifier, ReentrancyGuard {
         address _serviceFeeReceiver
     ) external nonReentrant {
         verify(_subPayment, _signature);
-        require(_subPayment.startTime > block.timestamp, "SubMan: startTime must be greater than current time");
+        require(_subPayment.startTime <= block.timestamp, "SubMan: startTime is in the future");
         LibSub.SubPlan memory _subPlan = _subPlans[_subPayment.subPlanId];
         uint256 newDeadline = block.timestamp + _subPlan.duration;
         require(_subPlan.active, "SubMan: subPlan is not active");

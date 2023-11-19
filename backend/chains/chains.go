@@ -24,7 +24,7 @@ func init() {
 		ChainID:  84531,
 		Name:     "Base Goerli",
 		RPC:      BASE_GOERLI_URL,
-		Address:  "0xFB02DAd83E41461bdf32598E12AB7bb97DC1Dc74",
+		Address:  "0x0eCAB8263adF78a9d06458E6e68274166c4eF5dd",
 		Interval: 5,
 		Confirms: 3,
 	})
@@ -32,7 +32,7 @@ func init() {
 		ChainID:  534351,
 		Name:     "Scroll Sepolia",
 		RPC:      "https://rpc.ankr.com/scroll_sepolia_testnet",
-		Address:  "0xeb8a6050A46013c968CB9d7DCAAf18825Fa2eae6",
+		Address:  "0x18aFd04CB87f75332CDc975028164d54601541C8",
 		Interval: 5,
 		Confirms: 3,
 	})

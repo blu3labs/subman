@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetSubManABI = exports.GetRPC = exports.GetSubManAddress = void 0;
 function GetSubManAddress(chainId) {
     if (chainId == 84531) {
-        return "0x609165A00BC01405a48F044A29d9497030F8c2B7";
+        return "0x0eCAB8263adF78a9d06458E6e68274166c4eF5dd";
     }
     else if (chainId == 534351) {
-        return "0x609165A00BC01405a48F044A29d9497030F8c2B7";
+        return "0x18aFd04CB87f75332CDc975028164d54601541C8";
     }
     else {
         return "";

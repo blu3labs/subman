@@ -1,8 +1,8 @@
 export function GetSubManAddress(chainId: number) { 
   if (chainId == 84531) {
-    return "0xFB02DAd83E41461bdf32598E12AB7bb97DC1Dc74";
+    return "0x0eCAB8263adF78a9d06458E6e68274166c4eF5dd";
   } else if (chainId == 534351) {
-    return "0xeb8a6050A46013c968CB9d7DCAAf18825Fa2eae6";
+    return "0x18aFd04CB87f75332CDc975028164d54601541C8";
   } else {
     return "";
   }
