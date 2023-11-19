@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSigner } from "./utils/useSigner";
 import "./subman.css";
 import { submanAbi, submanAddress } from "./contract";
-import { useAccount, useSwitchNetwork, erc20ABI } from "wagmi";
+import { useAccount, useSwitchNetwork, erc20ABI, useNetwork } from "wagmi";
 import { readContract } from "./utils/readContract";
 import { currencyAddress } from "./utils/currencyAddress";
 import { writeContract } from "./utils/writeContract";
@@ -18,6 +18,7 @@ const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
   const signer = useSigner();
 
   const { address } = useAccount();
+  const { chain } = useNetwork();
 
   const { switchNetworkAsync } = useSwitchNetwork();
 
@@ -131,9 +132,11 @@ const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
     true: "Subscribed",
     false:
       "Subscription " +
-      "| " +
       (showPrice
-        ? parseFloat(subPrice)?.toLocaleString("en-US") + " " + currencySymbol
+        ? "| " +
+          parseFloat(subPrice)?.toLocaleString("en-US") +
+          " " +
+          currencySymbol
         : ""),
     undefined: "Subscribe",
   };
@@ -234,6 +237,7 @@ const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
 
   const handleSubscribe = async () => {
     if (!signer) {
+      console.log("Please connect your wallet");
       toast.error("Please connect your wallet");
       return;
     }
@@ -245,9 +249,17 @@ const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
       isNaN(week) ||
       parseFloat(week) <= 0
     ) {
+      console.log("Please enter a valid number");
       toast.error("Please enter a valid number");
       return;
     }
+
+    if (chainId != chain?.id) {
+      toast.error("Please switch to Chain");
+      console.log("Please switch to Chain");
+      return;
+    }
+
     setSubscribeLoading(true);
 
     let amountNew = ethers.utils.parseUnits(
@@ -301,8 +313,10 @@ const Subman = ({ showPrice, planId, chainId, backgroundColor, textColor }) => {
 
       if (backRes?.status == 200) {
         toast.success("Subscribed Successfully");
+        console.log("Subscribed Successfully");
       } else {
         toast.error("Something went wrong");
+        console.log("Something went wrong");
       }
     } catch (e) {
       console.log(e);

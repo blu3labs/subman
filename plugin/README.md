@@ -13,7 +13,7 @@ import { Subman } from "subman-plugin";
 
 <Subman 
     planId={1}
-    chainId={84_531}
+    chainId={84531}
     showPrize={true}
     backgroundColor="#00a9ff"
     textColor="#fff"

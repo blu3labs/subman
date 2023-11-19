@@ -1,0 +1,35 @@
+body{
+  font-family: 'Open Sans', sans-serif !important;
+  background: rgb(212, 210, 210);
+}
+
+.app{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap:1rem;
+}
+
+.appTitle{
+  font-size: 2rem;
+  font-weight: 700;
+  color: #00A9FF;
+}
+
+.appCards{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  height: auto;
+}
+
+.subman-button{
+  height: 64px !important;
+  width: 200px !important;
+}

@@ -51,9 +51,11 @@ function Docs() {
         <div className="docsInfoArea">
           <div className="docsInfoAreaTitle">Installation</div>
           <div className="docsInfoBox">
-            <span>npm install subman-plugin wagmi</span>
+            <span>npm install subman-plugin wagmi ethers</span>
           </div>
         </div>
+
+      
 
         <div className="docsInfoArea">
           <div className="docsInfoAreaTitle">Usage</div>

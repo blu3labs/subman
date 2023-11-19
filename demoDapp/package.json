@@ -1,5 +1,5 @@
 {
-  "name": "subman",
+  "name": "demodapp",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,17 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@ensdomains/thorin": "^0.6.44",
     "@web3modal/wagmi": "^3.3.2",
-    "ethereum-blockies": "^0.1.1",
-    "moment": "^2.29.4",
+    "ethers": "^6.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
-    "react-transition-state": "^2.1.1",
-    "styled-components": "^6.1.1",
     "subman-plugin": "^1.1.3",
-    "vite": "^5.0.0",
     "wagmi": "^1.4.7"
   },
   "devDependencies": {
@@ -30,6 +25,7 @@
     "eslint": "^8.53.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.4"
+    "eslint-plugin-react-refresh": "^0.4.4",
+    "vite": "^5.0.0"
   }
 }
